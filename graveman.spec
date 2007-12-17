@@ -13,7 +13,6 @@ Patch: graveman-0.3.12-5-cdrkit.patch
 URL:		http://graveman.tuxfamily.org/index-e.php
 License:	GPL
 Group:		Archiving/Cd burning
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	ImageMagick
 BuildRequires:	gtk2-devel libglade2.0-devel libid3tag-devel
 BuildRequires:	libvorbis-devel libmad-devel
