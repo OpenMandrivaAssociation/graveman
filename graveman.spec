@@ -48,10 +48,6 @@ perl -p -i -e 's/install\:/none\:/g' man/Makefile
 %makeinstall_std
 
 #menu
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat << EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): command="%{name}" icon="%{name}.png" needs="x11" title="Graveman" longtitle="Simple CD Burning" section="System/Archiving/CD Burning" xdg="true"
-EOF
 desktop-file-install --vendor="" \
   --remove-category="Application" \
   --add-category="X-MandrivaLinux-System-Archiving-CDBurning" \
@@ -85,7 +81,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/*
 %{_mandir}/man1/*
 %{_mandir}/fr/man1/*
-%{_menudir}/%name
 %{_liconsdir}/%name.png
 %{_iconsdir}/%name.png
 %{_miconsdir}/%name.png
