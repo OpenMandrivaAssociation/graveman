@@ -14,7 +14,7 @@ URL:		http://graveman.tuxfamily.org/index-e.php
 License:	GPL
 Group:		Archiving/Cd burning
 BuildRoot:	%{_tmppath}/%{name}-buildroot
-BuildRequires:	ImageMagick
+BuildRequires:	imagemagick
 BuildRequires:	gtk2-devel libglade2.0-devel libid3tag-devel
 BuildRequires:	libvorbis-devel libmad-devel
 BuildRequires:	libflac-devel
