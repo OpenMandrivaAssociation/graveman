@@ -1,7 +1,7 @@
 %define name	graveman
 %define version 0.3.12
 %define realver %version-5
-%define release %mkrel 9
+%define release %mkrel 10
 
 Name: 	 	%{name}
 Summary: 	Simple frontend for CD creation
@@ -11,7 +11,7 @@ Release: 	%{release}
 Source:		http://graveman.tuxfamily.org/sources/%{name}-%{realver}.tar.bz2
 Patch: graveman-0.3.12-5-cdrkit.patch
 URL:		http://graveman.tuxfamily.org/index-e.php
-License:	GPL
+License:	GPLv2+
 Group:		Archiving/Cd burning
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	imagemagick
