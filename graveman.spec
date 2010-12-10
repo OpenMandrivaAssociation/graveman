@@ -1,7 +1,7 @@
 %define name	graveman
 %define version 0.3.12
 %define realver %version-5
-%define release %mkrel 10
+%define release %mkrel 11
 
 Name: 	 	%{name}
 Summary: 	Simple frontend for CD creation
