@@ -1,0 +1,2746 @@
+--- graveman-0.3.12-5/glade/dialog_properties.glade.cdrkit	2007-02-06 16:18:44.000000000 +0100
++++ graveman-0.3.12-5/glade/dialog_properties.glade	2007-02-06 16:19:53.000000000 +0100
+@@ -295,7 +295,7 @@
+ 	      <child>
+ 		<widget class="GtkCheckButton" id="overburn">
+ 		  <property name="visible">True</property>
+-		  <property name="tooltip" translatable="yes">Allow cdrecord to write more than the official size of a medium.
++		  <property name="tooltip" translatable="yes">Allow wodim to write more than the official size of a medium.
+ This feature depends on the fact that most blank media may hold more space than the official size.
+ There is no guarantee that your drive supports overburning at all. Make a test to check if your drive implements the feature.</property>
+ 		  <property name="can_focus">True</property>
+@@ -546,7 +546,7 @@
+ 		      <property name="visible">True</property>
+ 		      <property name="tooltip" translatable="yes">Input charset that defines the characters used in local file names.
+ This parameter will be used to generate ISO images.
+-Please read CHARACTER SETS section on mkisofs man page to get more informations.</property>
++Please read CHARACTER SETS section on genisoimage man page to get more informations.</property>
+ 		      <property name="visible_window">True</property>
+ 		      <property name="above_child">False</property>
+ 
+@@ -609,9 +609,9 @@
+ 	      <property name="column_spacing">5</property>
+ 
+ 	      <child>
+-		<widget class="GtkLabel" id="cdrecordlbl">
++		<widget class="GtkLabel" id="wodimlbl">
+ 		  <property name="visible">True</property>
+-		  <property name="label" translatable="yes">cdrecord</property>
++		  <property name="label" translatable="yes">wodim</property>
+ 		  <property name="use_underline">False</property>
+ 		  <property name="use_markup">False</property>
+ 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -633,9 +633,9 @@
+ 	      </child>
+ 
+ 	      <child>
+-		<widget class="GtkLabel" id="mkisofslbl">
++		<widget class="GtkLabel" id="genisoimagelbl">
+ 		  <property name="visible">True</property>
+-		  <property name="label" translatable="yes">mkisofs</property>
++		  <property name="label" translatable="yes">genisoimage</property>
+ 		  <property name="use_underline">False</property>
+ 		  <property name="use_markup">False</property>
+ 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -657,9 +657,9 @@
+ 	      </child>
+ 
+ 	      <child>
+-		<widget class="GtkLabel" id="readcdlbl">
++		<widget class="GtkLabel" id="readomlbl">
+ 		  <property name="visible">True</property>
+-		  <property name="label" translatable="yes">readcd</property>
++		  <property name="label" translatable="yes">readom</property>
+ 		  <property name="use_underline">False</property>
+ 		  <property name="use_markup">False</property>
+ 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
+@@ -729,11 +729,11 @@
+ 	      </child>
+ 
+ 	      <child>
+-		<widget class="GtkEntry" id="cdrecordpara">
++		<widget class="GtkEntry" id="wodimpara">
+ 		  <property name="visible">True</property>
+-		  <property name="tooltip" translatable="yes">Extra parameters that will be used by cdrecord to burn CD.
++		  <property name="tooltip" translatable="yes">Extra parameters that will be used by wodim to burn CD.
+ Normally you can let this line empty.
+-Please read cdrecord manual to get more informations.</property>
++Please read wodim manual to get more informations.</property>
+ 		  <property name="can_focus">True</property>
+ 		  <property name="editable">True</property>
+ 		  <property name="visibility">True</property>
+@@ -753,11 +753,11 @@
+ 	      </child>
+ 
+ 	      <child>
+-		<widget class="GtkEntry" id="mkisofspara">
++		<widget class="GtkEntry" id="genisoimagepara">
+ 		  <property name="visible">True</property>
+-		  <property name="tooltip" translatable="yes">Extra parameters that will be used by mkisofs to process ISO images.
++		  <property name="tooltip" translatable="yes">Extra parameters that will be used by genisoimage to process ISO images.
+ Normally you can let this line empty.
+-Please read mkisofs manual to get more informations.
++Please read genisoimage manual to get more informations.
+ </property>
+ 		  <property name="can_focus">True</property>
+ 		  <property name="editable">True</property>
+@@ -778,11 +778,11 @@
+ 	      </child>
+ 
+ 	      <child>
+-		<widget class="GtkEntry" id="readcdpara">
++		<widget class="GtkEntry" id="readompara">
+ 		  <property name="visible">True</property>
+-		  <property name="tooltip" translatable="yes">Extra parameters that will be used by readcd to read data cd.
++		  <property name="tooltip" translatable="yes">Extra parameters that will be used by readom to read data cd.
+ Normally you can let this line empty.
+-Please read readcd manual to get more informations.</property>
++Please read readom manual to get more informations.</property>
+ 		  <property name="can_focus">True</property>
+ 		  <property name="editable">True</property>
+ 		  <property name="visibility">True</property>
+@@ -1157,13 +1157,13 @@
+ 	      </child>
+ 
+ 	      <child>
+-		<widget class="GtkEventBox" id="cdrecordtips">
++		<widget class="GtkEventBox" id="wodimtips">
+ 		  <property name="visible">True</property>
+ 		  <property name="visible_window">True</property>
+ 		  <property name="above_child">True</property>
+ 
+ 		  <child>
+-		    <widget class="GtkImage" id="cdrecord">
++		    <widget class="GtkImage" id="wodim">
+ 		      <property name="visible">True</property>
+ 		      <property name="xalign">0.5</property>
+ 		      <property name="yalign">0.5</property>
+@@ -1209,13 +1209,13 @@
+ 	      </child>
+ 
+ 	      <child>
+-		<widget class="GtkEventBox" id="mkisofstips">
++		<widget class="GtkEventBox" id="genisoimagetips">
+ 		  <property name="visible">True</property>
+ 		  <property name="visible_window">True</property>
+ 		  <property name="above_child">True</property>
+ 
+ 		  <child>
+-		    <widget class="GtkImage" id="mkisofs">
++		    <widget class="GtkImage" id="genisoimage">
+ 		      <property name="visible">True</property>
+ 		      <property name="xalign">0.5</property>
+ 		      <property name="yalign">0.5</property>
+@@ -1235,13 +1235,13 @@
+ 	      </child>
+ 
+ 	      <child>
+-		<widget class="GtkEventBox" id="readcdtips">
++		<widget class="GtkEventBox" id="readomtips">
+ 		  <property name="visible">True</property>
+ 		  <property name="visible_window">True</property>
+ 		  <property name="above_child">True</property>
+ 
+ 		  <child>
+-		    <widget class="GtkImage" id="readcd">
++		    <widget class="GtkImage" id="readom">
+ 		      <property name="visible">True</property>
+ 		      <property name="xalign">0.5</property>
+ 		      <property name="yalign">0.5</property>
+@@ -1738,7 +1738,7 @@
+ 		  <child>
+ 		    <widget class="GtkButton" id="scancharset">
+ 		      <property name="visible">True</property>
+-		      <property name="tooltip" translatable="yes">Click here to scan again for mkisofs built in character sets. Use it after an mkisofs update.</property>
++		      <property name="tooltip" translatable="yes">Click here to scan again for genisoimage built in character sets. Use it after an genisoimage update.</property>
+ 		      <property name="can_default">True</property>
+ 		      <property name="can_focus">True</property>
+ 		      <property name="relief">GTK_RELIEF_NORMAL</property>
+--- graveman-0.3.12-5/po/cs.po.cdrkit	2005-05-17 03:16:34.000000000 +0200
++++ graveman-0.3.12-5/po/cs.po	2007-02-06 16:18:12.000000000 +0100
+@@ -227,10 +227,10 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Chyba komunikace s cdrecord. Ujistěte se, že máte přístup k cdrecord ve "
++"Chyba komunikace s wodim. Ujistěte se, že máte přístup k wodim ve "
+ "verzi 2.0!"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+@@ -1240,8 +1240,8 @@
+ msgstr ""
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
+-msgstr "Chyba komunikace s readcd během pokusu načíst velikost cd."
++msgid "Communication error with readom while trying to read cd size."
++msgstr "Chyba komunikace s readom během pokusu načíst velikost cd."
+ 
+ #: src/readcd.c:100
+ #, c-format
+@@ -2131,7 +2131,7 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+@@ -2177,8 +2177,8 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:24
+@@ -2223,9 +2223,9 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:38
+@@ -2260,16 +2260,16 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:58
+@@ -2293,7 +2293,7 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ 
+@@ -2408,8 +2408,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2428,12 +2428,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/de.po.cdrkit	2005-05-17 03:16:34.000000000 +0200
++++ graveman-0.3.12-5/po/de.po	2007-02-06 16:18:12.000000000 +0100
+@@ -231,9 +231,9 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+-msgstr "Problem mit cdrecord. �berpr�fen Sie, dass Sie cdrecord 2.0 haben!"
++msgstr "Problem mit wodim. �berpr�fen Sie, dass Sie wodim 2.0 haben!"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+ msgid "Simulation successful. Do you want to write the CD for real?"
+@@ -1244,8 +1244,8 @@
+ msgstr ""
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
+-msgstr "Kommunikationsfehler mit readcd w�hrend �berpr�fung der CD-Gr��e."
++msgid "Communication error with readom while trying to read cd size."
++msgstr "Kommunikationsfehler mit readom w�hrend �berpr�fung der CD-Gr��e."
+ 
+ #: src/readcd.c:100
+ #, c-format
+@@ -2154,7 +2154,7 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+@@ -2200,8 +2200,8 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:24
+@@ -2246,9 +2246,9 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:38
+@@ -2283,16 +2283,16 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:58
+@@ -2316,7 +2316,7 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ 
+@@ -2427,8 +2427,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2447,12 +2447,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/es.po.cdrkit	2005-05-17 03:16:34.000000000 +0200
++++ graveman-0.3.12-5/po/es.po	2007-02-06 16:18:12.000000000 +0100
+@@ -229,10 +229,10 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Error de comunicaci�n con cdrecord. �Aseg�rese que tiene acceso a cdrecord "
++"Error de comunicaci�n con wodim. �Aseg�rese que tiene acceso a wodim "
+ "versi�n 2.0!"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+@@ -1250,9 +1250,9 @@
+ msgstr ""
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
++msgid "Communication error with readom while trying to read cd size."
+ msgstr ""
+-"Error de comunicaci�n con readcd mientras se trataba de detectar el tama�o "
++"Error de comunicaci�n con readom mientras se trataba de detectar el tama�o "
+ "del CD."
+ 
+ #: src/readcd.c:100
+@@ -2168,7 +2168,7 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+@@ -2214,8 +2214,8 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:24
+@@ -2260,9 +2260,9 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:38
+@@ -2297,16 +2297,16 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:58
+@@ -2330,7 +2330,7 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ 
+@@ -2447,8 +2447,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2467,12 +2467,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/fr.po.cdrkit	2005-05-28 01:44:23.000000000 +0200
++++ graveman-0.3.12-5/po/fr.po	2007-02-06 16:18:12.000000000 +0100
+@@ -230,10 +230,10 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Erreur de communication avec cdrecord, vérifiez que vous possédez bien une "
++"Erreur de communication avec wodim, vérifiez que vous possédez bien une "
+ "version supérieure ou égale à la 2.0 !"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+@@ -279,7 +279,7 @@
+ #. erreur pas de cd vierge
+ #: src/cdrecord.c:722
+ msgid "CD recorder unsupported !"
+-msgstr "Erreur le graveur ne semble pas supporté par cdrecord !"
++msgstr "Erreur le graveur ne semble pas supporté par wodim !"
+ 
+ #. erreur fichier audio non compatible
+ #: src/cdrecord.c:727
+@@ -1263,9 +1263,9 @@
+ msgstr "J'ignore le paramètre %s car il manque le nom du fichier ensuite.\n"
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
++msgid "Communication error with readom while trying to read cd size."
+ msgstr ""
+-"Erreur de communication avec readcd lors de la tentative de détection de la "
++"Erreur de communication avec readom lors de la tentative de détection de la "
+ "la taille du cd."
+ 
+ #: src/readcd.c:100
+@@ -2245,7 +2245,7 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+@@ -2299,15 +2299,15 @@
+ "informations about programs who are present on your system."
+ msgstr ""
+ "Cliquez ici pour rechercher à nouveau les programmes externes utilisés par "
+-"graveman (cdrecord, cdrdao...)."
++"graveman (wodim, cdrdao...)."
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+ "Cliquez ici pour extraire à nouveau les définitions de tables de caractères "
+-"intégrées à mkisofs."
++"intégrées à genisoimage."
+ 
+ #: glade/dialog_properties.glade.h:24
+ msgid "Close and apply changes."
+@@ -2357,13 +2357,13 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+-"Paramètres supplémentaire à passer à cdrecord lors de la gravure d'un CD.\n"
++"Paramètres supplémentaire à passer à wodim lors de la gravure d'un CD.\n"
+ "En général vous pouvez laisser cette zone vide.\n"
+-"Vous devriez consulter le manuel de cdrecord pour avoir plus d'informations."
++"Vous devriez consulter le manuel de wodim pour avoir plus d'informations."
+ 
+ #: glade/dialog_properties.glade.h:38
+ msgid ""
+@@ -2415,25 +2415,25 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+-"Paramètres supplémentaire à passer à mkisofs lors de la création d'une image "
++"Paramètres supplémentaire à passer à genisoimage lors de la création d'une image "
+ "ISO.\n"
+ "En général vous pouvez laisser cette zone vide.\n"
+-"Vous devriez consulter le manuel de mkisofs pour avoir plus d'informations.\n"
++"Vous devriez consulter le manuel de genisoimage pour avoir plus d'informations.\n"
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+-"Paramètres supplémentaire à passer à readcd lors de la lecture d'un CD de "
++"Paramètres supplémentaire à passer à readom lors de la lecture d'un CD de "
+ "donées.\n"
+ "En général vous pouvez laisser cette zone vide.\n"
+-"Vous devriez consulter le manuel de readcd pour avoir plus d'informations."
++"Vous devriez consulter le manuel de readom pour avoir plus d'informations."
+ 
+ #: glade/dialog_properties.glade.h:58
+ msgid ""
+@@ -2464,12 +2464,12 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ "Format des caractères utilisés pour le nommage des fichiers locaux.\n"
+ "Ce paramètre est utilisé lors de la création d'une image ISO.\n"
+-"Vous devriez consulter la section CARACTER SETS de la page man de mkisofs "
++"Vous devriez consulter la section CARACTER SETS de la page man de genisoimage "
+ "pour obtenir plus d'informations."
+ 
+ #: glade/dialog_properties.glade.h:68
+@@ -2564,7 +2564,7 @@
+ 
+ #: glade/dialog_properties.glade.h:91
+ msgid "_Scan again for built in character sets"
+-msgstr "_Rechercher à nouveau les tables de caractères installées avec mkisofs"
++msgstr "_Rechercher à nouveau les tables de caractères installées avec genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:92
+ msgid "_Scan again for devices"
+@@ -2583,8 +2583,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2603,12 +2603,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/hu.po.cdrkit	2005-05-18 23:02:16.000000000 +0200
++++ graveman-0.3.12-5/po/hu.po	2007-02-06 16:18:12.000000000 +0100
+@@ -226,10 +226,10 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Kommunikációs hiba a cdrecord programmal. Ellenõrizze, hogy a cdrecord "
++"Kommunikációs hiba a wodim programmal. Ellenõrizze, hogy a wodim "
+ "program legalább 2.0 verziójú legyen!"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+@@ -1240,8 +1240,8 @@
+ msgstr "érvénytelen paraméter %s figyelmen kívül hagyása.\n"
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
+-msgstr "Kommunikációs hiba a readcd programmal a CD méretének beolvasásakor."
++msgid "Communication error with readom while trying to read cd size."
++msgstr "Kommunikációs hiba a readom programmal a CD méretének beolvasásakor."
+ 
+ #: src/readcd.c:100
+ #, c-format
+@@ -2194,13 +2194,13 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+ "test to check if your drive implements the feature."
+ msgstr ""
+-"Engedélyezi a cdrecord programnak, hogy a lemez méreténél több adatot írjon a "
++"Engedélyezi a wodim programnak, hogy a lemez méreténél több adatot írjon a "
+ "lemezre.\n"
+ "Ez a képesség függ az üres lemeztől, hogy mennyivel több adatot lehet rá "
+ "felírni a hivatalos méretnél.\n"
+@@ -2249,11 +2249,11 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+-"Kattintson az mkisofs beépített karakterkészleteinek újrakereséséhez. "
+-"Használja ezt, ha frissítette az mkisofs programot."
++"Kattintson az genisoimage beépített karakterkészleteinek újrakereséséhez. "
++"Használja ezt, ha frissítette az genisoimage programot."
+ 
+ #: glade/dialog_properties.glade.h:24
+ msgid "Close and apply changes."
+@@ -2303,13 +2303,13 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+-"Extra paraméterek a cdrecord program használatához.\n"
++"Extra paraméterek a wodim program használatához.\n"
+ "Normál esetben ez a sor üres.\n"
+-"Olvassa el a cdrecord kézikönyvét a további információkért."
++"Olvassa el a wodim kézikönyvét a további információkért."
+ 
+ #: glade/dialog_properties.glade.h:38
+ msgid ""
+@@ -2355,23 +2355,23 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+-"Extra paraméterek az mkisofs program használatához.\n"
++"Extra paraméterek az genisoimage program használatához.\n"
+ "Normál esetben ez a sor üres.\n"
+-"Olvassa el az mkisofs kézikönyvét a további információkért.\n"
++"Olvassa el az genisoimage kézikönyvét a további információkért.\n"
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+-"Extra paraméterek a readcd program használatához.\n"
++"Extra paraméterek a readom program használatához.\n"
+ "Normál esetben ez a sor üres.\n"
+-"Olvassa el a readcd kézikönyvét a további információkért."
++"Olvassa el a readom kézikönyvét a további információkért."
+ 
+ #: glade/dialog_properties.glade.h:58
+ msgid ""
+@@ -2398,12 +2398,12 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ "Bemenő karakterkészlet meghatározása a helyi fájlok használatához.\n"
+ "Ez a paraméter csak a lemezképfájl készítésekor használt.\n"
+-"További információkért olvassa el az mkisofs kézikönyv CHARACTER SETS  "
++"További információkért olvassa el az genisoimage kézikönyv CHARACTER SETS  "
+ "(Karakter készletek) részét."
+ 
+ #: glade/dialog_properties.glade.h:68
+@@ -2516,8 +2516,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2536,12 +2536,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/it.po.cdrkit	2005-05-17 03:16:34.000000000 +0200
++++ graveman-0.3.12-5/po/it.po	2007-02-06 16:18:12.000000000 +0100
+@@ -227,10 +227,10 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Errore di comunicazione con cdrecord. Verifica di aver accesso a cdrecord "
++"Errore di comunicazione con wodim. Verifica di aver accesso a wodim "
+ "versione 2.0!"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+@@ -1254,9 +1254,9 @@
+ msgstr "ignoro il parametro %s, non valido senza file.\n"
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
++msgid "Communication error with readom while trying to read cd size."
+ msgstr ""
+-"Errore di comunicazione con readcd durante la lettura della dimenzione del "
++"Errore di comunicazione con readom durante la lettura della dimenzione del "
+ "cd."
+ 
+ #: src/readcd.c:100
+@@ -2238,7 +2238,7 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+@@ -2293,11 +2293,11 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+ "Clicca qui per ripetere la ricerca delle codifiche caratteri (solitamente "
+-"dopo avere aggiornato mkisofs)."
++"dopo avere aggiornato genisoimage)."
+ 
+ #: glade/dialog_properties.glade.h:24
+ msgid "Close and apply changes."
+@@ -2348,13 +2348,13 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+-"Parametri aggiuntivi per cdrecord.\n"
++"Parametri aggiuntivi per wodim.\n"
+ "Di norma questa linea va lasciata vuota.\n"
+-"Fare riferimento al manuale di cdrecord per ulteriori informazioni."
++"Fare riferimento al manuale di wodim per ulteriori informazioni."
+ 
+ #: glade/dialog_properties.glade.h:38
+ msgid ""
+@@ -2400,23 +2400,23 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+-"Parametri aggiuntivi per mkisofs.\n"
++"Parametri aggiuntivi per genisoimage.\n"
+ "Di norma questa linea va lasciata vuota.\n"
+-"Fare riferimento al manuale di mkisofs per ulteriori informazioni.\n"
++"Fare riferimento al manuale di genisoimage per ulteriori informazioni.\n"
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+-"Parametri aggiuntivi per readcd.\n"
++"Parametri aggiuntivi per readom.\n"
+ "Di norma questa linea va lasciata vuota.\n"
+-"Fare riferimento al manuale di readcd per ulteriori informazioni."
++"Fare riferimento al manuale di readom per ulteriori informazioni."
+ 
+ #: glade/dialog_properties.glade.h:58
+ msgid ""
+@@ -2446,13 +2446,13 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ "I set di caratteri specificano la codifica caratteri usata per i nomi dei "
+ "file.\n"
+ "Questo parametro ha effetto quando si generano immagini ISO.\n"
+-"Far riferimento a man mkisofs, sezione CHARACTER SETS, per ulteriori "
++"Far riferimento a man genisoimage, sezione CHARACTER SETS, per ulteriori "
+ "informazioni"
+ 
+ #: glade/dialog_properties.glade.h:68
+@@ -2569,8 +2569,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2589,12 +2589,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/ja.po.cdrkit	2005-05-21 18:20:31.000000000 +0200
++++ graveman-0.3.12-5/po/ja.po	2007-02-06 16:18:12.000000000 +0100
+@@ -216,11 +216,11 @@
+ 
+ #: ../src/cdrecord.c:547 ../src/cdrecord.c:951
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"cdrecordとの連携でエラーです。"
+-"cdrecord release 2.0 へアクセスできるか確認してください"
++"wodimとの連携でエラーです。"
++"wodim release 2.0 へアクセスできるか確認してください"
+ 
+ #: ../src/cdrecord.c:559 ../src/cdrecord.c:963 ../src/cdrdao.c:444
+ msgid "Simulation successful. Do you want to write the CD for real?"
+@@ -1229,7 +1229,7 @@
+ msgstr ""
+ 
+ #: ../src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
++msgid "Communication error with readom while trying to read cd size."
+ msgstr ""
+ 
+ #: ../src/readcd.c:100
+@@ -2096,7 +2096,7 @@
+ 
+ #: ../glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+@@ -2140,8 +2140,8 @@
+ 
+ #: ../glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+ 
+ #: ../glade/dialog_properties.glade.h:24
+@@ -2188,9 +2188,9 @@
+ 
+ #: ../glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+ 
+ #: ../glade/dialog_properties.glade.h:38
+@@ -2225,16 +2225,16 @@
+ 
+ #: ../glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+ 
+ #: ../glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+ 
+ #: ../glade/dialog_properties.glade.h:58
+@@ -2258,7 +2258,7 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ 
+@@ -2372,7 +2372,7 @@
+ msgstr ""
+ 
+ #: ../glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
++msgid "wodim"
+ msgstr ""
+ 
+ #: ../glade/dialog_properties.glade.h:97
+@@ -2392,11 +2392,11 @@
+ msgstr ""
+ 
+ #: ../glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
++msgid "genisoimage"
+ msgstr ""
+ 
+ #: ../glade/dialog_properties.glade.h:102
+-msgid "readcd"
++msgid "readom"
+ msgstr ""
+ 
+ #: ../glade/dialog_properties.glade.h:103
+--- graveman-0.3.12-5/po/lt.po.cdrkit	2005-05-17 03:16:34.000000000 +0200
++++ graveman-0.3.12-5/po/lt.po	2007-02-06 16:18:12.000000000 +0100
+@@ -229,11 +229,11 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Susisiekimo su cdrecord klaida. Patikrinkite, ar turite 2.0 versijos "
+-"cdrecord!"
++"Susisiekimo su wodim klaida. Patikrinkite, ar turite 2.0 versijos "
++"wodim!"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+ msgid "Simulation successful. Do you want to write the CD for real?"
+@@ -1253,8 +1253,8 @@
+ "praleidžiamas netinkamas parametras „%s“, kuriam nenurodytas bylos vardas.\n"
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
+-msgstr "Susisiekimo su readcd klaida, bandant nuskaityti CD dydį."
++msgid "Communication error with readom while trying to read cd size."
++msgstr "Susisiekimo su readom klaida, bandant nuskaityti CD dydį."
+ 
+ #: src/readcd.c:100
+ #, c-format
+@@ -2218,13 +2218,13 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+ "test to check if your drive implements the feature."
+ msgstr ""
+-"Leisti cdrecord įrašyti daugiau, nei deklaruojama laikmenos telpa.\n"
++"Leisti wodim įrašyti daugiau, nei deklaruojama laikmenos telpa.\n"
+ "Dažnai tuščios laikmenos gali talpinti daugiau duomenų, nei deklaruoja "
+ "oficialiai.\n"
+ "Nėra garantijos, jog jūsų įrenginys apskritai mokės įrašyti perteklinę "
+@@ -2276,11 +2276,11 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+-"Spustelkite čia, norėdami perskanuoti mkisofs palaikomas koduotes. "
+-"Pasinaudokite šia galimybe, atšviežine mkisofs."
++"Spustelkite čia, norėdami perskanuoti genisoimage palaikomas koduotes. "
++"Pasinaudokite šia galimybe, atšviežine genisoimage."
+ 
+ #: glade/dialog_properties.glade.h:24
+ msgid "Close and apply changes."
+@@ -2330,13 +2330,13 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+-"Papildomi programos „cdrecord“ parametrai, naudotini, ja įrašant CD.\n"
++"Papildomi programos „wodim“ parametrai, naudotini, ja įrašant CD.\n"
+ "Dažniausiai galite šį lauką palikti tuščią.\n"
+-"Norėdami sužinoti daugiau, skaitykite „cdrecord“ instrukciją."
++"Norėdami sužinoti daugiau, skaitykite „wodim“ instrukciją."
+ 
+ #: glade/dialog_properties.glade.h:38
+ msgid ""
+@@ -2385,25 +2385,25 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+-"Papildomi programos „mkisofs“ parametrai, naudotini, ja apdorojant ISO "
++"Papildomi programos „genisoimage“ parametrai, naudotini, ja apdorojant ISO "
+ "atvaizdžius.\n"
+ "Dažniausiai galite šį lauką palikti tuščią.\n"
+-"Norėdami sužinoti daugiau, skaitykite „mkisofs“ instrukciją.\n"
++"Norėdami sužinoti daugiau, skaitykite „genisoimage“ instrukciją.\n"
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+-"Papildomi programos „readcd“ parametrai, naudotini, ja nuskaitant duomenų "
++"Papildomi programos „readom“ parametrai, naudotini, ja nuskaitant duomenų "
+ "CD.\n"
+ "Dažniausiai galite šį lauką palikti tuščią.\n"
+-"Norėdami sužinoti daugiau, skaitykite „readcd“ instrukciją."
++"Norėdami sužinoti daugiau, skaitykite „readom“ instrukciją."
+ 
+ #: glade/dialog_properties.glade.h:58
+ msgid ""
+@@ -2433,12 +2433,12 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ "Įvesties koduotė, kuria saugomos lokalios bylos.\n"
+ "Šis parametras bus naudojamas, kuriant ISO atvaizdžius.\n"
+-"Norėdami sužinoti daugiau, skaitykite „mkisofs“ instrukcijos skyrių "
++"Norėdami sužinoti daugiau, skaitykite „genisoimage“ instrukcijos skyrių "
+ "„KODUOTĖS“ („CHARACTER SETS“)."
+ 
+ #: glade/dialog_properties.glade.h:68
+@@ -2551,8 +2551,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2571,12 +2571,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/nl.po.cdrkit	2005-05-17 03:16:34.000000000 +0200
++++ graveman-0.3.12-5/po/nl.po	2007-02-06 16:18:12.000000000 +0100
+@@ -228,11 +228,11 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Communicatie fout met cdrecord. Controleer of u voldoende rechten hebt om "
+-"cdrecord (versie 2.0 of hoger) te gebruiken!"
++"Communicatie fout met wodim. Controleer of u voldoende rechten hebt om "
++"wodim (versie 2.0 of hoger) te gebruiken!"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+ msgid "Simulation successful. Do you want to write the CD for real?"
+@@ -1250,8 +1250,8 @@
+ msgstr ""
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
+-msgstr "Communicatiefout met readcd bij het bepalen van de grootte van de CD."
++msgid "Communication error with readom while trying to read cd size."
++msgstr "Communicatiefout met readom bij het bepalen van de grootte van de CD."
+ 
+ #: src/readcd.c:100
+ #, c-format
+@@ -2160,7 +2160,7 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+@@ -2206,8 +2206,8 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:24
+@@ -2252,9 +2252,9 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:38
+@@ -2289,16 +2289,16 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:58
+@@ -2322,7 +2322,7 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ 
+@@ -2437,8 +2437,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2457,12 +2457,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/no.po.cdrkit	2005-05-17 03:16:34.000000000 +0200
++++ graveman-0.3.12-5/po/no.po	2007-02-06 16:18:12.000000000 +0100
+@@ -222,10 +222,10 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Kommunikasjonsproblem med cdrecord. se etter at du har adgang til cdrecord "
++"Kommunikasjonsproblem med wodim. se etter at du har adgang til wodim "
+ "versjon 2.0 !"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+@@ -1235,8 +1235,8 @@
+ msgstr ""
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
+-msgstr "Kommunikasjonsproblem med readcd mens pr�vde � lese cd-st�rrelse."
++msgid "Communication error with readom while trying to read cd size."
++msgstr "Kommunikasjonsproblem med readom mens pr�vde � lese cd-st�rrelse."
+ 
+ #: src/readcd.c:100
+ #, c-format
+@@ -2150,7 +2150,7 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+@@ -2196,8 +2196,8 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:24
+@@ -2242,9 +2242,9 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:38
+@@ -2279,16 +2279,16 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:58
+@@ -2312,7 +2312,7 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ 
+@@ -2428,8 +2428,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2448,12 +2448,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/pl.po.cdrkit	2005-05-09 01:47:09.000000000 +0200
++++ graveman-0.3.12-5/po/pl.po	2007-02-06 16:18:12.000000000 +0100
+@@ -223,10 +223,10 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Błąd komunikacji z cdrecord. Sprawdź prawa dostępu do cdrecord wersja 2.0 !"
++"Błąd komunikacji z wodim. Sprawdź prawa dostępu do wodim wersja 2.0 !"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+ msgid "Simulation successful. Do you want to write the CD for real?"
+@@ -1246,8 +1246,8 @@
+ msgstr "pomijanie nieprawidłowego parametru %s bez pliku.\n"
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
+-msgstr "Błąd komunikacji z readcd w trakcie próby odczytu rozmiaru płyty."
++msgid "Communication error with readom while trying to read cd size."
++msgstr "Błąd komunikacji z readom w trakcie próby odczytu rozmiaru płyty."
+ 
+ #: src/readcd.c:100
+ #, c-format
+@@ -2207,13 +2207,13 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+ "test to check if your drive implements the feature."
+ msgstr ""
+-"Pozwól cdrecord nagrywać więcej niż pozwala oficjalny rozmiar nośnika.\n"
++"Pozwól wodim nagrywać więcej niż pozwala oficjalny rozmiar nośnika.\n"
+ "Ta opcja polega na tym, że większość czystych nośników może zmieścić więcej "
+ "danych niż ich oficjalny rozmiar.\n"
+ "Nie ma żadnej gwarancji, że Twój napęd w ogóle obsługuje overburning. "
+@@ -2263,11 +2263,11 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+-"Kliknij tutaj aby przeskanować jeszcze raz wbudowane w mkisofs zestawy "
+-"znaków. Użyj tego po uaktualnieniu mkisofs."
++"Kliknij tutaj aby przeskanować jeszcze raz wbudowane w genisoimage zestawy "
++"znaków. Użyj tego po uaktualnieniu genisoimage."
+ 
+ #: glade/dialog_properties.glade.h:24
+ msgid "Close and apply changes."
+@@ -2317,13 +2317,13 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+-"Dodatkowe parametry, które będą użyte przez cdrecord do nagrania CD.\n"
++"Dodatkowe parametry, które będą użyte przez wodim do nagrania CD.\n"
+ "Możesz zostawić to pole puste.\n"
+-"Przeczytaj pomoc do cdrecord aby uzyskać więcej informacji."
++"Przeczytaj pomoc do wodim aby uzyskać więcej informacji."
+ 
+ #: glade/dialog_properties.glade.h:38
+ msgid ""
+@@ -2371,24 +2371,24 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+-"Dodatkowe parametry, które będą użyte przez mkisofs do przetwarzania obrazów "
++"Dodatkowe parametry, które będą użyte przez genisoimage do przetwarzania obrazów "
+ "ISO.\n"
+ "Możesz zostawić to pole puste.\n"
+-"Przeczytaj pomoc do mkisofs aby uzyskać więcej informacji.\n"
++"Przeczytaj pomoc do genisoimage aby uzyskać więcej informacji.\n"
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+-"Dodatkowe parametry, które będą użyte przez readcd do czytania CD.\n"
++"Dodatkowe parametry, które będą użyte przez readom do czytania CD.\n"
+ "Możesz zostawić to pole puste.\n"
+-"Przeczytaj pomoc do readcd aby uzyskać więcej informacji."
++"Przeczytaj pomoc do readom aby uzyskać więcej informacji."
+ 
+ #: glade/dialog_properties.glade.h:58
+ msgid ""
+@@ -2418,13 +2418,13 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ "Wejściowy zestaw znaków który definiuje znaki używane w lokalnych nazwach "
+ "plików.\n"
+ "Ten parametr będzie użyty do tworzenia obrazów ISO.\n"
+-"Przeczytaj sekcję CHARACTER SETS strony podręcznika systemowego mkisofs aby "
++"Przeczytaj sekcję CHARACTER SETS strony podręcznika systemowego genisoimage aby "
+ "uzyskać więcej informacji."
+ 
+ #: glade/dialog_properties.glade.h:68
+@@ -2537,8 +2537,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2557,12 +2557,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/pt_BR.po.cdrkit	2005-05-17 03:16:34.000000000 +0200
++++ graveman-0.3.12-5/po/pt_BR.po	2007-02-06 16:18:12.000000000 +0100
+@@ -235,10 +235,10 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Erro de comunica��o com o cdrecord. Cheque se voc� possui acesso ao cdrecord "
++"Erro de comunica��o com o wodim. Cheque se voc� possui acesso ao wodim "
+ "vers�o 2.0 !"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+@@ -1263,8 +1263,8 @@
+ msgstr ""
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
+-msgstr "Erro de comunica��o com o readcd na tentativa de ler o tamanho do CD."
++msgid "Communication error with readom while trying to read cd size."
++msgstr "Erro de comunica��o com o readom na tentativa de ler o tamanho do CD."
+ 
+ #: src/readcd.c:100
+ #, c-format
+@@ -2185,7 +2185,7 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+@@ -2231,8 +2231,8 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:24
+@@ -2277,9 +2277,9 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:38
+@@ -2314,16 +2314,16 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:58
+@@ -2347,7 +2347,7 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ 
+@@ -2468,8 +2468,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2488,12 +2488,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/ru.po.cdrkit	2005-05-17 03:16:34.000000000 +0200
++++ graveman-0.3.12-5/po/ru.po	2007-02-06 16:18:12.000000000 +0100
+@@ -232,10 +232,10 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Ошибка доступа к программе cdrecord. Проверьте наличие cdrecord версии 2.0!"
++"Ошибка доступа к программе wodim. Проверьте наличие wodim версии 2.0!"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+ msgid "Simulation successful. Do you want to write the CD for real?"
+@@ -1244,8 +1244,8 @@
+ msgstr "игнорируем неправильный параметр %s без файла.\n"
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
+-msgstr "Ошибка соединения с программой readcd при вычислении размера диска."
++msgid "Communication error with readom while trying to read cd size."
++msgstr "Ошибка соединения с программой readom при вычислении размера диска."
+ 
+ #: src/readcd.c:100
+ #, c-format
+@@ -2198,13 +2198,13 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+ "test to check if your drive implements the feature."
+ msgstr ""
+-"Позволить cdrecord'у записывать немного больше, чем официальный размер "
++"Позволить wodim'у записывать немного больше, чем официальный размер "
+ "носителя.\n"
+ "Эта функция зависит от неофициальных параметров носителя (сколько "
+ "недокуменированного свободного места ещё есть).\n"
+@@ -2256,11 +2256,11 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+-"Кликните здесь, чтобы повторить поиск встроенных кодировок mkisofs. "
+-"Используйте это после обновления mkisofs."
++"Кликните здесь, чтобы повторить поиск встроенных кодировок genisoimage. "
++"Используйте это после обновления genisoimage."
+ 
+ #: glade/dialog_properties.glade.h:24
+ msgid "Close and apply changes."
+@@ -2310,14 +2310,14 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+-"Дополнительные параметры, которые будут использованы cdrecord для записи "
++"Дополнительные параметры, которые будут использованы wodim для записи "
+ "CD.\n"
+ "Обычно вы можете оставить эту строку пустой.\n"
+-"Пожалуйста, прочтите документацию к cdrecord для получения дополнительной "
++"Пожалуйста, прочтите документацию к wodim для получения дополнительной "
+ "информации."
+ 
+ #: glade/dialog_properties.glade.h:38
+@@ -2371,24 +2371,24 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+-"Дополнительные параметры, которые будут использованы mkisofs для создания "
++"Дополнительные параметры, которые будут использованы genisoimage для создания "
+ "ISO-образов.\n"
+ "Обычно вы можете оставить эту строку пустой.\n"
+ "Пожалуйста, прочтите документацию к flac для получения большей информации.\n"
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+-"Дополнительные параметры, которые будут использованы readcd для чтения CD.\n"
++"Дополнительные параметры, которые будут использованы readom для чтения CD.\n"
+ "Обычно вы можете оставить эту строку пустой.\n"
+-"Пожалуйста, прочтите документацию к readcd для получения большей информации."
++"Пожалуйста, прочтите документацию к readom для получения большей информации."
+ 
+ #: glade/dialog_properties.glade.h:58
+ msgid ""
+@@ -2417,12 +2417,12 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ "Кодировка ввода, которая определяет символы, используемые в именах файлов.\n"
+ "Этот параметр будет использоваться для создания ISO-образов.\n"
+-"Пожалуйста, прочтите CHARACTER SETS секцию в man-странице mkisofs, чтобы "
++"Пожалуйста, прочтите CHARACTER SETS секцию в man-странице genisoimage, чтобы "
+ "получить дополнительную информацию."
+ 
+ #: glade/dialog_properties.glade.h:68
+@@ -2535,8 +2535,8 @@
+ msgstr "cdrdao"
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
+-msgstr "cdrecord"
++msgid "wodim"
++msgstr "wodim"
+ 
+ #: glade/dialog_properties.glade.h:97
+ msgid "dvd+rw-format"
+@@ -2555,12 +2555,12 @@
+ msgstr "growisofs"
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
+-msgstr "mkisofs"
++msgid "genisoimage"
++msgstr "genisoimage"
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
+-msgstr "readcd"
++msgid "readom"
++msgstr "readom"
+ 
+ #: glade/dialog_properties.glade.h:103
+ msgid "sox"
+--- graveman-0.3.12-5/po/sv.po.cdrkit	2005-05-17 03:16:34.000000000 +0200
++++ graveman-0.3.12-5/po/sv.po	2007-02-06 16:18:12.000000000 +0100
+@@ -227,11 +227,11 @@
+ 
+ #: src/cdrecord.c:521 src/cdrecord.c:922
+ msgid ""
+-"Communication error with cdrecord. Check that you have access to cdrecord "
++"Communication error with wodim. Check that you have access to wodim "
+ "release 2.0 !"
+ msgstr ""
+-"Kommunikationsproblem med cdrecord. Kolla så att du har tillgång till "
+-"cdrecord version 2.0 !"
++"Kommunikationsproblem med wodim. Kolla så att du har tillgång till "
++"wodim version 2.0 !"
+ 
+ #: src/cdrecord.c:533 src/cdrecord.c:934 src/cdrdao.c:441
+ msgid "Simulation successful. Do you want to write the CD for real?"
+@@ -1241,8 +1241,8 @@
+ msgstr ""
+ 
+ #: src/readcd.c:95
+-msgid "Communication error with readcd while trying to read cd size."
+-msgstr "Kommunikationsproblem med readcd medans försök att läsa cd-storlek."
++msgid "Communication error with readom while trying to read cd size."
++msgstr "Kommunikationsproblem med readom medans försök att läsa cd-storlek."
+ 
+ #: src/readcd.c:100
+ #, c-format
+@@ -2124,7 +2124,7 @@
+ 
+ #: glade/dialog_properties.glade.h:12
+ msgid ""
+-"Allow cdrecord to write more than the official size of a medium.\n"
++"Allow wodim to write more than the official size of a medium.\n"
+ "This feature depends on the fact that most blank media may hold more space "
+ "than the official size.\n"
+ "There is no guarantee that your drive supports overburning at all. Make a "
+@@ -2170,8 +2170,8 @@
+ 
+ #: glade/dialog_properties.glade.h:23
+ msgid ""
+-"Click here to scan again for mkisofs built in character sets. Use it after "
+-"an mkisofs update."
++"Click here to scan again for genisoimage built in character sets. Use it after "
++"an genisoimage update."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:24
+@@ -2216,9 +2216,9 @@
+ 
+ #: glade/dialog_properties.glade.h:35
+ msgid ""
+-"Extra parameters that will be used by cdrecord to burn CD.\n"
++"Extra parameters that will be used by wodim to burn CD.\n"
+ "Normally you can let this line empty.\n"
+-"Please read cdrecord manual to get more informations."
++"Please read wodim manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:38
+@@ -2253,16 +2253,16 @@
+ 
+ #: glade/dialog_properties.glade.h:51
+ msgid ""
+-"Extra parameters that will be used by mkisofs to process ISO images.\n"
++"Extra parameters that will be used by genisoimage to process ISO images.\n"
+ "Normally you can let this line empty.\n"
+-"Please read mkisofs manual to get more informations.\n"
++"Please read genisoimage manual to get more informations.\n"
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:55
+ msgid ""
+-"Extra parameters that will be used by readcd to read data cd.\n"
++"Extra parameters that will be used by readom to read data cd.\n"
+ "Normally you can let this line empty.\n"
+-"Please read readcd manual to get more informations."
++"Please read readom manual to get more informations."
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:58
+@@ -2286,7 +2286,7 @@
+ msgid ""
+ "Input charset that defines the characters used in local file names.\n"
+ "This parameter will be used to generate ISO images.\n"
+-"Please read CHARACTER SETS section on mkisofs man page to get more "
++"Please read CHARACTER SETS section on genisoimage man page to get more "
+ "informations."
+ msgstr ""
+ 
+@@ -2398,7 +2398,7 @@
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:96
+-msgid "cdrecord"
++msgid "wodim"
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:97
+@@ -2419,11 +2419,11 @@
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:101
+-msgid "mkisofs"
++msgid "genisoimage"
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:102
+-msgid "readcd"
++msgid "readom"
+ msgstr ""
+ 
+ #: glade/dialog_properties.glade.h:103
+--- graveman-0.3.12-5/src/callbacks.c.cdrkit	2005-05-30 23:53:06.000000000 +0200
++++ graveman-0.3.12-5/src/callbacks.c	2007-02-06 16:18:12.000000000 +0100
+@@ -895,7 +895,7 @@
+   if (Lret == GTK_RESPONSE_YES) {
+     gint *Lpid = (gint *)sc_grave_get_data(Lg, "pid");
+     if (*Lpid) {
+-      /* on envoi un TERM au process (cdrecord...) pour qu'il s'arrete ! */
++      /* on envoi un TERM au process (wodim...) pour qu'il s'arrete ! */
+ _DEB("kill de %d\n", *Lpid);
+       kill(*Lpid, SIGINT);
+     }
+@@ -1626,7 +1626,7 @@
+   Ltimeout = g_timeout_add(500, encours_callback, Lg);
+ 
+   proc_init_cdrominfo(NULL);
+-  cdrecord_scan_for_drives(Lg, NULL);
++  wodim_scan_for_drives(Lg, NULL);
+ 
+   if (Labort == FALSE) {
+     for (Lcur = Glistdrives; Lcur; Lcur = Lcur ? g_slist_next(Lcur) : Lnext) {
+@@ -1676,7 +1676,7 @@
+   gint *Lpid = (gint *)sc_grave_get_data(Lg, "pid");
+ printf(" on va kill !\n");
+   if (Lpid && *Lpid) {
+-    /* on envoi un TERM au process (cdrecord...) pour qu'il s'arrete ! */
++    /* on envoi un TERM au process (wodim...) pour qu'il s'arrete ! */
+ _DEB("kill de %d\n", *Lpid);
+     kill(*Lpid, SIGINT);
+   }
+--- graveman-0.3.12-5/src/cdrdao.c.cdrkit	2005-05-28 02:37:14.000000000 +0200
++++ graveman-0.3.12-5/src/cdrdao.c	2007-02-06 16:18:12.000000000 +0100
+@@ -1,4 +1,4 @@
+-/* cdrecord.c
++/* wodim.c
+  * Copyright (C) 2004, 2005 Sylvain Cresto <scresto@gmail.com>
+  *
+  * This file is part of graveman!
+--- graveman-0.3.12-5/src/cdrecord.c.cdrkit	2005-05-28 02:37:14.000000000 +0200
++++ graveman-0.3.12-5/src/cdrecord.c	2007-02-06 16:18:12.000000000 +0100
+@@ -1,4 +1,4 @@
+-/* cdrecord.c
++/* wodim.c
+  * Copyright (C) 2004, 2005 Sylvain Cresto <scresto@gmail.com>
+  *
+  * This file is part of graveman!
+@@ -24,7 +24,7 @@
+ 
+ #include "graveman.h"
+ 
+-/* communication avec cdrecord */
++/* communication avec wodim */
+ 
+ #define SCANDEVICE "scsibus"
+ #define CDRECORD_NOSUCHFILE "No read access for"
+@@ -115,7 +115,7 @@
+     { NULL, NULL, NULL, 0}
+   };
+ 
+-gboolean cdrecord_grave_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata);
++gboolean wodim_grave_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata);
+ 
+ static gchar *get_title(gint Anbrgravure, gint Acurcd, gboolean Adosimul)
+ {
+@@ -138,7 +138,7 @@
+ }
+ 
+ /* recherche des lecteurs */
+-gboolean cdrecord_extractlecteur(gchar *Achaine, gchar **Adev, gchar **Amarque, gchar **Amodel,
++gboolean wodim_extractlecteur(gchar *Achaine, gchar **Adev, gchar **Amarque, gchar **Amodel,
+   gchar **Aquoi)
+ {
+   gchar *s = Achaine;
+@@ -196,7 +196,7 @@
+     return FALSE;
+   }
+ 
+-  if (cdrecord_extractlecteur(Lbuffer, &Ldev, &Lmarque, &Lmodel, &Lquoi) == TRUE) {
++  if (wodim_extractlecteur(Lbuffer, &Ldev, &Lmarque, &Lmodel, &Lquoi) == TRUE) {
+ 
+     matos_insert_or_update_drive(Ldev, Lmarque, Lmodel, Lquoi, Ldrivedesc);
+ 
+@@ -214,7 +214,7 @@
+ }
+ 
+ /* scan des lecteurs */
+-gboolean cdrecord_scan_for_drives(Tgrave *Ag, GError **Aerror)
++gboolean wodim_scan_for_drives(Tgrave *Ag, GError **Aerror)
+ {
+   gchar **Lcmd;
+   gchar *Lcommandline;
+@@ -230,7 +230,7 @@
+   free_drives(FALSE);
+   for (Lcurentry = listesearchdrives; Lcurentry->detectline && *Labort == FALSE; Lcurentry++) {
+ 
+-    Lcommandline = g_strdup_printf("%s -scanbus %s", conf_get_string("cdrecord"), Lcurentry->detectline);
++    Lcommandline = g_strdup_printf("%s -scanbus %s", conf_get_string("wodim"), Lcurentry->detectline);
+   _DEB("commande =%s\n", Lcommandline);
+     Lstatus = g_shell_parse_argv(Lcommandline, &Lnbrarg, &Lcmd, Aerror);
+     g_free(Lcommandline);
+@@ -271,14 +271,14 @@
+ }
+ 
+ /* mise a jour capacit� du lecteur */
+-gboolean cdrecord_maj_drive_info(Tdriveinfo *Adrive, gchar *Adev, GError **Aerror)
++gboolean wodim_maj_drive_info(Tdriveinfo *Adrive, gchar *Adev, GError **Aerror)
+ {
+   gchar *Lcommandline, *Lout = NULL, *Lerr = NULL;
+   gchar *scd = NULL, *sdvd = NULL, *f;
+   gint Lexit = 0;
+   gboolean Lstatus;
+ 
+-  Lcommandline = g_strdup_printf("%s -prcap dev=%s", conf_get_string("cdrecord"),
++  Lcommandline = g_strdup_printf("%s -prcap dev=%s", conf_get_string("wodim"),
+       Adev ? Adev : DRIVE_DEV(Adrive));
+ 
+ _DEB("==================%s\n", Lcommandline);  
+@@ -327,7 +327,7 @@
+ 
+   /* ok maintenant on regarde si le lecteur supporte le burnfree, si oui on l'utilisera
+    * lors des gravures */
+-  Lcommandline = g_strdup_printf("%s -checkdrive dev=%s driveropts=help", conf_get_string("cdrecord"),
++  Lcommandline = g_strdup_printf("%s -checkdrive dev=%s driveropts=help", conf_get_string("wodim"),
+       Adev ? Adev : DRIVE_DEV(Adrive));
+ _DEB("==================%s\n", Lcommandline);  
+   Lstatus = g_spawn_command_line_sync(Lcommandline, &Lout, &Lerr, &Lexit, Aerror);
+@@ -341,7 +341,7 @@
+   return TRUE;
+ }
+ 
+-/* recherche les parametres supllementaires a passer a cdrecord */
++/* recherche les parametres supllementaires a passer a wodim */
+ gchar *burn_data_getextrapara(Tgrave *Ag)
+ {
+   gchar *Lformat = get_combo_value(sc_grave_get_widget(Ag, "dataformat"));
+@@ -472,7 +472,7 @@
+     matos_umount_device(Ldevice, NULL);
+ 
+     Lcommandline = g_strdup_printf("%s dev=%s -v gracetime=2 %s%s %s %s %s %s %s %s %s %s '%s' %s",
+-        conf_get_string("cdrecord"), DRIVE_DEV(Ldevice),
++        conf_get_string("wodim"), DRIVE_DEV(Ldevice),
+         *Lbufvitesse != '0' ? "speed=" : "", *Lbufvitesse != '0' ? Lbufvitesse : "",  
+         Ldosimul ? " -dummy" : "",  /* simulation ? */
+         Ldosimul || Lnotfix ? " -nofix" : "", /* fixer le cd apres ecriture ? */
+@@ -481,7 +481,7 @@
+         Lblank,
+         Lextrapara && *Lextrapara ? Lextrapara : "",  /* parametre supplementaire tel que le mode d'ecriture */
+         conf_get_boolean("overburn") ? "-overburn" : "",
+-        conf_get_string("cdrecordpara"),
++        conf_get_string("wodimpara"),
+         Liso,
+         DRIVE_BURN_FREE(Ldevice) ? "driveropts=burnfree" : ""
+         );
+@@ -512,14 +512,14 @@
+     g_io_channel_set_buffered(Lcom, FALSE);
+     g_io_channel_set_flags( Lcom, G_IO_FLAG_NONBLOCK, NULL );
+     Lcomevent = g_io_add_watch (Lcom, (G_IO_IN | G_IO_HUP | G_IO_ERR | G_IO_PRI),
+-                                      cdrecord_grave_callback, Ag);
++                                      wodim_grave_callback, Ag);
+   
+     Lcomerr = g_io_channel_unix_new( g_err );
+     g_io_channel_set_encoding (Lcomerr, NULL, NULL);
+     g_io_channel_set_buffered(Lcomerr, FALSE);
+     g_io_channel_set_flags( Lcomerr, G_IO_FLAG_NONBLOCK, NULL );
+     Lcomerrevent = g_io_add_watch (Lcomerr, (G_IO_IN | G_IO_HUP | G_IO_ERR | G_IO_PRI),
+-                                      cdrecord_grave_callback, Ag); 
++                                      wodim_grave_callback, Ag); 
+     
+     while (*Lcont > 0 && *Labort == FALSE) {
+       gtk_main_iteration();    
+@@ -545,10 +545,10 @@
+     }
+ 
+     if (*Loperationstatus == FALSE) {
+-      /* cdrecord n'a pas reussi a grave le cd mais on n'a intercepte aucune erreur ! argh!
++      /* wodim n'a pas reussi a grave le cd mais on n'a intercepte aucune erreur ! argh!
+        * dans tous les cas ce n'est pas normal, on genere une erreur */
+       g_set_error(Aerror, GRAVEMAN_ERROR, _ERR_UNKNOWN_ERROR, 
+-        _("Communication error with cdrecord. Check that you have access to cdrecord release 2.0 !"));
++        _("Communication error with wodim. Check that you have access to wodim release 2.0 !"));
+       Lstatus = FALSE;
+       break;
+     }
+@@ -595,8 +595,8 @@
+   g_free(Ltxt);
+ }
+ 
+-/* callback appele lorsque cdrecord grave les pistes */
+-gboolean cdrecord_grave_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
++/* callback appele lorsque wodim grave les pistes */
++gboolean wodim_grave_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
+ {
+   GIOStatus Lstatus;
+   Tgrave *Lg = (Tgrave *)Adata;
+@@ -764,10 +764,10 @@
+     g_set_error(Lerreur, GRAVEMAN_ERROR, _ERR_INAPPROPRIATE_DATA, Lsbuf);
+     (*Lcont) = 0;
+     return FALSE;
+-  } else if ((f=strstr(Lbuffer, conf_get_string("cdrecord")))) {
+-    f=f+strlen(conf_get_string("cdrecord"))+1;
++  } else if ((f=strstr(Lbuffer, conf_get_string("wodim")))) {
++    f=f+strlen(conf_get_string("wodim"))+1;
+     if (*(f++)==':') {
+-      /* erreur cdrecord */
++      /* erreur wodim */
+       Ltxt = _UTF8(f);
+       g_set_error(Lerreur, GRAVEMAN_ERROR, _ERR_INAPPROPRIATE_DATA, Ltxt);
+       g_free(Ltxt);
+@@ -876,7 +876,7 @@
+ 
+     Lblank = get_blank_type(Ag, Lmediadetect1);
+     Lcommandline = g_strdup_printf("%s dev=%s -v gracetime=2 %s%s %s%s %s %s %s %s %s -pad -audio %s %s",
+-        conf_get_string("cdrecord"), DRIVE_DEV(Ldevice),
++        conf_get_string("wodim"), DRIVE_DEV(Ldevice),
+         *Lbufvitesse == '0' ? "" : "speed=", *Lbufvitesse == '0' ? "" : Lbufvitesse,
+         Ldosimul ? " -dummy" : "",  /* simulation ? */ 
+         Ldosimul || Lnotfix ? " -nofix" : "", /* fixer le cd apres ecriture ? */
+@@ -885,7 +885,7 @@
+         ((Lsimul && Lnbrpass != 2) || (!Lsimul)) ? Lblank : "", /* effacer le cdrw avant ?
+                                                 * on efface pas le cd apres la simulation vu que l'operation
+                                                 * a �t� faite juste avant */
+-        conf_get_string("cdrecordpara"),
++        conf_get_string("wodimpara"),
+         conf_get_boolean("overburn") ? "-overburn" : "",
+         Lfileslist,
+         DRIVE_BURN_FREE(Ldevice) ? "driveropts=burnfree" : ""
+@@ -918,14 +918,14 @@
+     g_io_channel_set_buffered(Lcom, FALSE);
+     g_io_channel_set_flags( Lcom, G_IO_FLAG_NONBLOCK, NULL );
+     Lcomevent = g_io_add_watch (Lcom, (G_IO_IN | G_IO_HUP | G_IO_ERR | G_IO_PRI),
+-                                        cdrecord_grave_callback, Ag);
++                                        wodim_grave_callback, Ag);
+   
+     Lcomerr = g_io_channel_unix_new( g_err );
+     g_io_channel_set_encoding (Lcomerr, NULL, NULL);
+     g_io_channel_set_buffered(Lcomerr, FALSE);
+     g_io_channel_set_flags( Lcomerr, G_IO_FLAG_NONBLOCK, NULL );
+     Lcomerrevent = g_io_add_watch (Lcomerr, (G_IO_IN | G_IO_HUP | G_IO_ERR | G_IO_PRI),
+-                                        cdrecord_grave_callback, Ag);  
++                                        wodim_grave_callback, Ag);  
+     
+     while (*Lcont>0 && *Labort == FALSE) {
+       gtk_main_iteration(); 
+@@ -949,10 +949,10 @@
+       break;
+     }
+     if (*Loperationstatus == FALSE) {
+-      /* cdrecord n'a pas reussi a grave le cd mais on n'a intercepte aucune erreur ! argh!
++      /* wodim n'a pas reussi a grave le cd mais on n'a intercepte aucune erreur ! argh!
+        * dans tous les cas ce n'est pas normal, on genere une erreur */
+       g_set_error(Aerror, GRAVEMAN_ERROR, _ERR_UNKNOWN_ERROR, 
+-          _("Communication error with cdrecord. Check that you have access to cdrecord release 2.0 !"));
++          _("Communication error with wodim. Check that you have access to wodim release 2.0 !"));
+       Lstatus = FALSE;
+       break;
+     }
+@@ -1041,10 +1041,10 @@
+   gint *Lcont = sc_grave_get_data(Ag, "cont");
+   Tdriveinfo *Ldevice = matos_get_drive_info(Ag, "dstothercombo");
+ 
+-  /* pid de cdrecord */
++  /* pid de wodim */
+   gint *Lpid = (gint *) sc_grave_get_data(Ag, "pid");
+ 
+-  Lcommandline = g_strdup_printf("%s dev=%s -v -fix", conf_get_string("cdrecord"), DRIVE_DEV(Ldevice));
++  Lcommandline = g_strdup_printf("%s dev=%s -v -fix", conf_get_string("wodim"), DRIVE_DEV(Ldevice));
+ 
+   _DEB("execution [%s]\n", Lcommandline);
+   Lstatus = g_shell_parse_argv(Lcommandline, &Lnbrarg, &Lcmd, Aerror);
+@@ -1103,7 +1103,7 @@
+ /* ejecter un CD */
+ void eject_cd(gchar *Adev, GError **Aerror)
+ {
+-  gchar *Lcommandline = g_strdup_printf("%s -eject dev=%s", conf_get_string("cdrecord"), Adev);
++  gchar *Lcommandline = g_strdup_printf("%s -eject dev=%s", conf_get_string("wodim"), Adev);
+   _DEB("EJECT %s\n", Adev);
+   
+   g_spawn_command_line_sync(Lcommandline, NULL, NULL, NULL, Aerror);
+@@ -1124,11 +1124,11 @@
+   Tdriveinfo *Ldevice = matos_get_drive_info(Ag, "dstothercombo");
+   gboolean *Lfastblank = sc_grave_get_data(Ag, "usefastblank");
+ 
+-  /* pid de cdrecord */
++  /* pid de wodim */
+   gint *Lpid = (gint *) sc_grave_get_data(Ag, "pid");
+ 
+   Lcommandline = g_strdup_printf("%s dev=%s -v gracetime=2 blank=%s",
+-      conf_get_string("cdrecord"), DRIVE_DEV(Ldevice), (*Lfastblank == TRUE ? "fast" : "all"));
++      conf_get_string("wodim"), DRIVE_DEV(Ldevice), (*Lfastblank == TRUE ? "fast" : "all"));
+ 
+   _DEB("execution [%s]\n", Lcommandline);
+   Lstatus = g_shell_parse_argv(Lcommandline, &Lnbrarg, &Lcmd, Aerror);
+@@ -1183,7 +1183,7 @@
+   return *Aerror ? FALSE : TRUE;
+ }
+ 
+-gboolean cdrecord_mediainfo_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
++gboolean wodim_mediainfo_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
+ {
+   GIOStatus Lstatus;
+   Tgrave *Lg = (Tgrave *)Adata;
+@@ -1231,7 +1231,7 @@
+ 
+ /* retourne les informations sur le disque courant pour par exemple
+  * continuer une gravure multi session */
+-gchar *cdrecord_get_mediainfo(Tgrave *Ag, Tdriveinfo *Adevice, GError **Aerror)
++gchar *wodim_get_mediainfo(Tgrave *Ag, Tdriveinfo *Adevice, GError **Aerror)
+ {
+   gchar **Lcmd;
+   gchar *Lcommandline;
+@@ -1250,7 +1250,7 @@
+ 
+   sc_grave_set_data(Ag, &Lmsinfo, "msinfo");
+   
+-  Lcommandline = g_strdup_printf("%s dev=%s -msinfo", conf_get_string("cdrecord"), DRIVE_DEV(Adevice));
++  Lcommandline = g_strdup_printf("%s dev=%s -msinfo", conf_get_string("wodim"), DRIVE_DEV(Adevice));
+ _DEB("1execution [%s]", Lcommandline);
+   Lstatus = g_shell_parse_argv(Lcommandline, &Lnbrarg, &Lcmd, Aerror);
+   g_free(Lcommandline);
+@@ -1264,7 +1264,7 @@
+     g_io_channel_set_encoding (Lcom, NULL, NULL);
+     g_io_channel_set_flags( Lcom, G_IO_FLAG_NONBLOCK, NULL );
+     Lcomevent = g_io_add_watch (Lcom, (G_IO_IN | G_IO_HUP | G_IO_ERR | G_IO_PRI),
+-                                      cdrecord_mediainfo_callback, Ag);
++                                      wodim_mediainfo_callback, Ag);
+ 
+     while (*Lcont > 0 && *Labort == FALSE) {
+      gtk_main_iteration();
+--- graveman-0.3.12-5/src/config.c.cdrkit	2005-05-31 00:08:06.000000000 +0200
++++ graveman-0.3.12-5/src/config.c	2007-02-06 16:18:12.000000000 +0100
+@@ -32,12 +32,12 @@
+ /* liste des directives utilisees dans le fichier de configuration
+  * TYPE, clef, requis ou non, valeur par defaut */
+ TProgRequis Glisteprogrequis[] = {
+-  { CONF_PROG, "cdrecord", "", CONF_SAVEALWAYS },
+-  { CONF_STRING, "cdrecordpara", "", CONF_SAVEALWAYS },
+-  { CONF_PROG, "mkisofs", "", CONF_SAVEALWAYS },
+-  { CONF_STRING, "mkisofspara", "", CONF_SAVEALWAYS },
+-  { CONF_PROG, "readcd", "", CONF_SAVEALWAYS },
+-  { CONF_STRING, "readcdpara", "", CONF_SAVEALWAYS },
++  { CONF_PROG, "wodim", "", CONF_SAVEALWAYS },
++  { CONF_STRING, "wodimpara", "", CONF_SAVEALWAYS },
++  { CONF_PROG, "genisoimage", "", CONF_SAVEALWAYS },
++  { CONF_STRING, "genisoimagepara", "", CONF_SAVEALWAYS },
++  { CONF_PROG, "readom", "", CONF_SAVEALWAYS },
++  { CONF_STRING, "readompara", "", CONF_SAVEALWAYS },
+   { CONF_PROG, "sox", "", CONF_SAVEALWAYS },
+   { CONF_STRING, "soxpara", "", CONF_SAVEALWAYS },
+   { CONF_PROG, "dvd+rw-mediainfo", "", CONF_SAVEALWAYS },
+@@ -539,8 +539,8 @@
+ #endif
+     }
+     
+-    /* pour mkisofs on regarde qu'il y ai bien le support iso version 2 */
+-    conf_store_value("mkisofs_support_isov2", _BOOLEAN_CONF(check_mkisofs()));
++    /* pour genisoimage on regarde qu'il y ai bien le support iso version 2 */
++    conf_store_value("genisoimage_support_isov2", _BOOLEAN_CONF(check_genisoimage()));
+ 
+     /* pour sox on regarde si il a bien le support ogg / mp3 */
+     check_sox();
+@@ -556,7 +556,7 @@
+   }
+ 
+   if (Aop & SEARCH_CHARSETS) {
+-    /* scan des charsets definie dans mkisofs */
++    /* scan des charsets definie dans genisoimage */
+     cherchecharset(NULL, Ag);
+   }
+ 
+@@ -800,8 +800,8 @@
+     gtk_widget_set_sensitive(GTK_WIDGET(Lobjentry), TRUE);
+     gtk_label_set_text(GTK_LABEL(Lobjlbl), (gchar *)Avalue);
+ 
+-    if (!strcmp((gchar *)Akey, "mkisofs") && FALSE == conf_get_boolean("mkisofs_support_isov2")) {
+-      /* mkisofs est bien la, mais pas de support ISO v2 */
++    if (!strcmp((gchar *)Akey, "genisoimage") && FALSE == conf_get_boolean("genisoimage_support_isov2")) {
++      /* genisoimage est bien la, mais pas de support ISO v2 */
+       gtk_image_set_from_pixbuf(GTK_IMAGE(Lobj), get_image("WARNIcon"));
+       g_snprintf(Ltipstxt, sizeof(Ltipstxt)-1, _("%s was found but does not support ISO 9660 version 2, this function will be disabled."), (gchar *)Akey);
+     } else if (!strcmp((gchar *)Akey, "sox") &&
+--- graveman-0.3.12-5/src/growisofs.c.cdrkit	2005-05-31 00:00:43.000000000 +0200
++++ graveman-0.3.12-5/src/growisofs.c	2007-02-06 16:18:12.000000000 +0100
+@@ -59,7 +59,7 @@
+   }
+ }
+ 
+-/* callback appele lorsque cdrecord grave les pistes */
++/* callback appele lorsque wodim grave les pistes */
+ gboolean growisofs_grave_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
+ {
+   GIOStatus Lstatus;
+--- graveman-0.3.12-5/src/interface.c.cdrkit	2005-05-28 02:37:14.000000000 +0200
++++ graveman-0.3.12-5/src/interface.c	2007-02-06 16:18:12.000000000 +0100
+@@ -839,8 +839,8 @@
+   GtkButton *Lbtnburncopy1 = GTK_BUTTON(sc_grave_get_widget(Ag, "btnburncopy1"));
+   GtkButton *Lbtnfixcdother1 = GTK_BUTTON(sc_grave_get_widget(Ag, "btnfixcdother1"));
+   GtkButton *Lbtnerasecdrwother1 = GTK_BUTTON(sc_grave_get_widget(Ag, "btnerasecdrwother1"));
+-  gboolean Lreadcd, Lwritecdr, Lwritecdrw, Lreaddvd, Lwritedvd;
+-  matos_get_current_matos(&Lreadcd, &Lwritecdr, &Lwritecdrw, &Lreaddvd, &Lwritedvd);
++  gboolean Lreadom, Lwritecdr, Lwritecdrw, Lreaddvd, Lwritedvd;
++  matos_get_current_matos(&Lreadom, &Lwritecdr, &Lwritecdrw, &Lreaddvd, &Lwritedvd);
+   
+   remplirecombograveur(Lsrccopycombo, TYPE_ALL + TYPE_ISO, conf_get_string("srccopycombo"));
+   
+@@ -854,7 +854,7 @@
+ 
+   remplirecombograveur(Ldstothercombo, TYPE_ALLWRITER, conf_get_string("dstothercombo"));
+ 
+-  gtk_widget_set_sensitive(GTK_WIDGET(Lbtnburncopy1), Lreadcd);
++  gtk_widget_set_sensitive(GTK_WIDGET(Lbtnburncopy1), Lreadom);
+   gtk_widget_set_sensitive(GTK_WIDGET(Lbtnburnaudio2), Lwritecdr);
+   gtk_widget_set_sensitive(GTK_WIDGET(Lbtnfixcdother1), Lwritecdr);
+   gtk_widget_set_sensitive(GTK_WIDGET(Lbtnerasecdrwother1), Lwritecdrw);
+@@ -1429,7 +1429,7 @@
+   /* mise a jour combo "iso level" */
+   if (Aaction & COMBO_UPDATE) {
+     remplirecombo_full(GTK_COMBO_BOX(sc_grave_get_widget(Ag, "dataisolevel")), "", Gisolevel,
+-        TRUE, conf_get_string("dataisolevel"), conf_get_int("mkisofs_support_isov2"));
++        TRUE, conf_get_string("dataisolevel"), conf_get_int("genisoimage_support_isov2"));
+   }
+ }
+ 
+--- graveman-0.3.12-5/src/matos.c.cdrkit	2005-05-30 23:51:12.000000000 +0200
++++ graveman-0.3.12-5/src/matos.c	2007-02-06 16:18:12.000000000 +0100
+@@ -96,12 +96,12 @@
+   if (g_slist_length(Glistdrives)==0) Glistdrives = NULL;
+ }
+ 
+-void matos_get_current_matos(gboolean *Areadcd, gboolean *Awritecdr, gboolean *Awritecdrw, gboolean *Areaddvd, gboolean *Awritedvd)
++void matos_get_current_matos(gboolean *Areadom, gboolean *Awritecdr, gboolean *Awritecdrw, gboolean *Areaddvd, gboolean *Awritedvd)
+ {
+   GSList *Lcur;
+   Tdriveinfo *Ldrive;
+ 
+-  if (Areadcd) *Areadcd = FALSE;
++  if (Areadom) *Areadom = FALSE;
+   if (Awritecdr) *Awritecdr = FALSE;
+   if (Awritecdrw) *Awritecdrw = FALSE;
+   if (Areaddvd) *Areaddvd = FALSE;
+@@ -110,7 +110,7 @@
+   for (Lcur = Glistdrives; Lcur; Lcur = g_slist_next(Lcur)) { 
+     Ldrive = (Tdriveinfo *)Lcur->data;
+ 
+-    if (DRIVE_READER(Ldrive) && Areadcd) *Areadcd = TRUE;
++    if (DRIVE_READER(Ldrive) && Areadom) *Areadom = TRUE;
+     if (DRIVE_WRITER(Ldrive) && Awritecdr) *Awritecdr = TRUE; 
+     if (DRIVE_CDRW_WRITER(Ldrive) && Awritecdrw) *Awritecdrw = TRUE; 
+     if (DRIVE_DVDREADER(Ldrive) && Areaddvd) *Areaddvd = TRUE;
+@@ -186,7 +186,7 @@
+   sc_grave_set_data(Ag, Aerror, "gerror");  /* pointeur retour des erreurs */
+ 
+   if (!Lsource) {
+-    /* copie d'une image vers un cd, on utilise cdrecord */
++    /* copie d'une image vers un cd, on utilise wodim */
+     Lptriso = gtk_entry_get_text(Llecteuriso);
+     Ltxt = _FILENAME(Lptriso);
+     g_strlcpy(Liso, Ltxt, MAXPATHLEN-1);
+@@ -210,7 +210,7 @@
+       sc_grave_del_data(Ag, "iso");
+     }
+   } else if (!Lgraveur) {
+-    /* copie d'un cd vers une image, on utilise readcd */
++    /* copie d'un cd vers une image, on utilise readom */
+     struct stat Lfstat;
+     Lptriso = gtk_entry_get_text(Lgraveuriso);
+     Ltxt = _FILENAME(Lptriso);
+@@ -353,7 +353,7 @@
+     sc_grave_del_data(Ag, "extrapara");
+     g_free(Lextrapara);
+     if (Lgraveur && Lstatus && *Labort==FALSE) {
+-      /* ici il faut appeler cdrecord ! */
++      /* ici il faut appeler wodim ! */
+       Lextrapara = burn_data_getextrapara(Ag);
+       sc_grave_set_data(Ag, Lextrapara, "extrapara"); /* parametres supplementaires */
+       Lstatus = burn_from_image("data", Ag, Aerror);
+@@ -816,7 +816,7 @@
+ {
+   Adrive->type = 0;
+ 
+-  cdrecord_maj_drive_info(Adrive, Adev, Aerror);
++  wodim_maj_drive_info(Adrive, Adev, Aerror);
+ 
+   /* use /proc/sys/dev/cdrom/info with linux to detect DVD capability */
+   proc_maj_drive_info(Adrive, Aerror);
+--- graveman-0.3.12-5/src/mkisofs.c.cdrkit	2005-05-28 02:37:14.000000000 +0200
++++ graveman-0.3.12-5/src/mkisofs.c	2007-02-06 16:18:12.000000000 +0100
+@@ -1,4 +1,4 @@
+-/* mkisofs.c
++/* genisoimage.c
+  * Copyright (C) 2004, 2005 Sylvain Cresto <scresto@gmail.com>
+  *
+  * This file is part of graveman!
+@@ -24,10 +24,10 @@
+ 
+ #include "graveman.h"
+ 
+-/* communication avec mkisofs */
++/* communication avec genisoimage */
+ 
+ #define MKISOFS_ESTIMATE "done, estimate finish"
+-#define MKISOFS_ERROR "mkisofs:"
++#define MKISOFS_ERROR "genisoimage:"
+ #define MKISOFS_IGNORE "-follow-links does not always"
+ #define MKISOFS_OK "Total translation table size"
+ #define MKISOFS_NOSPACE "No space left on device"
+@@ -35,15 +35,15 @@
+ #define MKISOFS_CHARSET "Known charsets are:"
+ 
+ /* on verifie si le support iso9660 version 2 est disponnible ou non */
+-gboolean check_mkisofs()
++gboolean check_genisoimage()
+ {
+-  gchar *Lmkisofs = conf_get_string("mkisofs");
++  gchar *Lgenisoimage = conf_get_string("genisoimage");
+   gchar *Lcommandline, *Lerr = NULL;
+   gboolean Lstatus;
+   gint Lexit = 0;
+-  if (!Lmkisofs || !*Lmkisofs) return FALSE;
++  if (!Lgenisoimage || !*Lgenisoimage) return FALSE;
+ 
+-  Lcommandline = g_strdup_printf("%s -help", conf_get_string("mkisofs"));
++  Lcommandline = g_strdup_printf("%s -help", conf_get_string("genisoimage"));
+   Lstatus = g_spawn_command_line_sync(Lcommandline, NULL, &Lerr, &Lexit, NULL);
+   g_free(Lcommandline);
+ 
+@@ -53,7 +53,7 @@
+   return Lstatus;
+ }
+ 
+-/* recherche les parametres supplementaires a passer a mkisofs */
++/* recherche les parametres supplementaires a passer a genisoimage */
+ gchar *make_image_getextrapara(Tgrave *Ag, gchar *Aop)
+ {
+   const gchar *Ldatavoli = gtk_entry_get_text(GTK_ENTRY(sc_grave_get_widgetv(Ag, "%svoli", Aop)));
+@@ -86,7 +86,7 @@
+         Tdriveinfo *Ldevice = matos_get_drive_info(Ag, "dstdatacombo");
+         if (Ldevice) {
+           Ldevchar = DRIVE_DEV(Ldevice);
+-          Lmediainfo = cdrecord_get_mediainfo(Ag, Ldevice, NULL);
++          Lmediainfo = wodim_get_mediainfo(Ag, Ldevice, NULL);
+         }
+       }
+     }
+@@ -114,7 +114,7 @@
+   return Lreturn;
+ }
+ 
+-gboolean mkisofs_makeimage_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
++gboolean genisoimage_makeimage_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
+ {
+   GIOStatus Lstatus;
+   Tgrave *Lg = (Tgrave *)Adata;
+@@ -201,7 +201,7 @@
+   gtk_label_set_text(Ltitle, _("Writing image..."));
+ 
+   Lcommandline = g_strdup_printf("%s %s %s -o %s -graft-points -path-list %s/pathlist", 
+-      conf_get_string("mkisofs"), Lextrapara, conf_get_string("mkisofspara"), Liso, Ltmpdir);
++      conf_get_string("genisoimage"), Lextrapara, conf_get_string("genisoimagepara"), Liso, Ltmpdir);
+ 
+   _DEB("execution [%s]\n", Lcommandline);
+   Lstatus = g_shell_parse_argv(Lcommandline, &Lnbrarg, &Lcmd, Aerror);
+@@ -225,13 +225,13 @@
+   g_io_channel_set_encoding (Lcom, NULL, NULL);
+   g_io_channel_set_flags( Lcom, G_IO_FLAG_NONBLOCK, NULL );
+   Lcomevent = g_io_add_watch (Lcom, (G_IO_IN | G_IO_HUP | G_IO_ERR | G_IO_PRI),
+-                                      mkisofs_makeimage_callback, Ag);
++                                      genisoimage_makeimage_callback, Ag);
+ 
+   Lcomerr = g_io_channel_unix_new( g_err );
+   g_io_channel_set_encoding (Lcomerr, NULL, NULL);
+   g_io_channel_set_flags( Lcomerr, G_IO_FLAG_NONBLOCK, NULL );
+   Lcomerrevent = g_io_add_watch (Lcomerr, (G_IO_IN | G_IO_HUP | G_IO_ERR | G_IO_PRI),
+-                                      mkisofs_makeimage_callback, Ag); 
++                                      genisoimage_makeimage_callback, Ag); 
+ _DEB("debut !!");
+   while (*Lcont > 0 && *Labort == FALSE) {
+    gtk_main_iteration();
+@@ -243,7 +243,7 @@
+   g_source_remove(Lcomerrevent);
+   g_source_remove(Lcomevent);
+ 
+-  /* fermeture mkisofs */
++  /* fermeture genisoimage */
+   g_io_channel_shutdown(Lcomerr, FALSE, NULL);
+   g_io_channel_unref(Lcomerr);  
+   g_io_channel_shutdown(Lcom, FALSE, NULL);
+@@ -259,7 +259,7 @@
+   return TRUE;  
+ }
+ 
+-/* recuperation des charsets integr� dans mkisofs */
++/* recuperation des charsets integr� dans genisoimage */
+ gboolean get_builtin_charset(Tgrave *Ag, GError **Aerror)
+ {
+   gchar *Lcommandline, *Lout = NULL, *Lerr = NULL;
+@@ -267,11 +267,11 @@
+   gchar **Lcharsetl;
+   gint Lexit = 0, i;
+   gboolean Lajout = FALSE;
+-  gchar *Lmkisofs = conf_get_string("mkisofs");
++  gchar *Lgenisoimage = conf_get_string("genisoimage");
+ 
+-  if (!Lmkisofs || !*Lmkisofs) return FALSE;
++  if (!Lgenisoimage || !*Lgenisoimage) return FALSE;
+ 
+-  Lcommandline = g_strdup_printf("%s -input-charset help", Lmkisofs);
++  Lcommandline = g_strdup_printf("%s -input-charset help", Lgenisoimage);
+ _DEB("command [%s]", Lcommandline);
+   Lstatus = g_spawn_command_line_sync(Lcommandline, &Lout, &Lerr, &Lexit, Aerror);
+   g_free(Lcommandline);
+--- graveman-0.3.12-5/src/readcd.c.cdrkit	2005-05-28 02:37:14.000000000 +0200
++++ graveman-0.3.12-5/src/readcd.c	2007-02-06 16:18:12.000000000 +0100
+@@ -1,4 +1,4 @@
+-/* readcd.c
++/* readom.c
+  * Copyright (C) 2004, 2005 Sylvain Cresto <scresto@gmail.com>
+  *
+  * This file is part of graveman!
+@@ -24,11 +24,11 @@
+ 
+ #include "graveman.h"
+ 
+-/* communication avec readcd */
++/* communication avec readom */
+ 
+ #define READCD_CAPACITY "end:"
+ #define READCD_PROGRESS "addr:"
+-#define READCD_MSG "readcd:"
++#define READCD_MSG "readom:"
+ #define READCD_DONE "Time total:"
+ #define READCD_READSPEED "Read  speed:"
+ #define READCD_READSPEED_CD "CD"
+@@ -40,7 +40,7 @@
+ #define CDRECORD_BUF "buf"
+ #define CDRECORD_STATUS "fifo was "
+ 
+-gboolean readcd_makeimage_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
++gboolean readom_makeimage_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
+ {
+   GIOStatus Lstatus;
+   Tgrave *Lg = (Tgrave *)Adata;
+@@ -83,7 +83,7 @@
+     }
+     
+   } else if ((f=strstr(Lbuffer, READCD_CAPACITY))) {
+-    /* on re�oi la taille du cd, c'est l'une des premieres lignes renvoyes par readcd,
++    /* on re�oi la taille du cd, c'est l'une des premieres lignes renvoyes par readom,
+      * une foi cette ligne re�u c'est le veritable debut de la creation de l'image cd */
+     f=f+strlen(READCD_CAPACITY);
+     f=ltrim(f);
+@@ -92,7 +92,7 @@
+ 
+     if (*Lreadtodo == 0) {
+       g_set_error(Lerreur, GRAVEMAN_ERROR, _ERR_UNKNOWN_ERROR, 
+-            _("Communication error with readcd while trying to read cd size."));
++            _("Communication error with readom while trying to read cd size."));
+       *Lcont = 0;
+       return FALSE;
+     }
+@@ -120,7 +120,7 @@
+     g_snprintf(Lsbuf, sizeof(Lsbuf)-1, "%.0f%%", Ltava*100);
+     gtk_progress_bar_set_text(Lprogressbar, Lsbuf);
+   } else if ((f=strstr(Lbuffer, READCD_MSG))) {
+-    /* erreur readcd !*/
++    /* erreur readom !*/
+     _DEB(" MSG = [%s]\n", Lbuffer);
+ 
+     Ltxt = g_strdup_printf(_("Cannot create image: %s"), Lbuffer);
+@@ -163,7 +163,7 @@
+   matos_umount_device(Ldevice, NULL);
+ 
+   Lcommandline = g_strdup_printf("%s dev=%s f=\"%s\" %s%s -v",
+-        conf_get_string("readcd"), DRIVE_DEV(Ldevice), Liso, *Lbufvitesse != '0' ? "speed=" : "", *Lbufvitesse != '0' ? Lbufvitesse : "");
++        conf_get_string("readom"), DRIVE_DEV(Ldevice), Liso, *Lbufvitesse != '0' ? "speed=" : "", *Lbufvitesse != '0' ? Lbufvitesse : "");
+   g_free(Lbufvitesse);
+ 
+   _DEB("execution [%s]\n", Lcommandline);
+@@ -188,13 +188,13 @@
+   g_io_channel_set_encoding (Lcom, NULL, NULL);
+   g_io_channel_set_flags( Lcom, G_IO_FLAG_NONBLOCK, NULL );
+   Lcomevent = g_io_add_watch (Lcom, (G_IO_IN | G_IO_HUP | G_IO_ERR | G_IO_PRI),
+-                                      readcd_makeimage_callback, Ag);
++                                      readom_makeimage_callback, Ag);
+ 
+   Lcomerr = g_io_channel_unix_new( g_err );
+   g_io_channel_set_encoding (Lcomerr, NULL, NULL);
+   g_io_channel_set_flags( Lcomerr, G_IO_FLAG_NONBLOCK, NULL );
+   Lcomerrevent = g_io_add_watch (Lcomerr, (G_IO_IN | G_IO_HUP | G_IO_ERR | G_IO_PRI),
+-                                      readcd_makeimage_callback, Ag); 
++                                      readom_makeimage_callback, Ag); 
+   while (*Lcont>0 && *Labort == FALSE) {
+    gtk_main_iteration();    
+   }
+@@ -204,7 +204,7 @@
+   g_source_remove(Lcomevent);
+   g_source_remove(Lcomerrevent);
+ 
+-  /* fermeture readcd */
++  /* fermeture readom */
+   g_io_channel_shutdown(Lcomerr, FALSE, NULL);
+   g_io_channel_unref(Lcomerr);  
+   g_io_channel_shutdown(Lcom, FALSE, NULL);
+@@ -224,17 +224,17 @@
+ }
+ 
+ /* callback appele lors de la copie d'un cd a la vole
+- * renvoi en fait ce qui est lu sur cdrecord */
++ * renvoi en fait ce qui est lu sur wodim */
+ #if 0
+ 
+  NON UTILISE POUR LE MOMENT, ET A REVOIR ..
+-gboolean readcd_redirect_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
++gboolean readom_redirect_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
+ {
+   GtkWidget *Lwindow1 = (GtkWidget *) Adata;
+   gchar Lbuffer[_BUF_SIZE];
+   gint *Lcont = (gint *) g_object_get_data(G_OBJECT(Lwindow1), "contsrc"); /* on traite encore des donnees ? */
+   GError **Lerreur = (GError **) g_object_get_data(G_OBJECT(Lwindow1), "gerror"); /* pointeur erreur */
+-  GIOChannel *Lcdrecord = (GIOChannel *) g_object_get_data(G_OBJECT(Lwindow1), "cdrecord");
++  GIOChannel *Lwodim = (GIOChannel *) g_object_get_data(G_OBJECT(Lwindow1), "wodim");
+   gsize Llu = 0, Lecris = 0;
+ 
+   /* fin du callback lorsque l'on recoi un signal comme quoi le pipe est ferme */
+@@ -249,15 +249,15 @@
+   }
+   Lbuffer[Llu]=0;
+   
+-  g_io_channel_write_chars(Lcdrecord, (const gchar *)Lbuffer, Llu, &Lecris, Lerreur);
++  g_io_channel_write_chars(Lwodim, (const gchar *)Lbuffer, Llu, &Lecris, Lerreur);
+ 
+   return TRUE;
+ }
+ #endif
+ 
+ 
+-/* callback appele lorsque readcd determine la taille d'un cd */
+-gboolean readcd_getsize_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
++/* callback appele lorsque readom determine la taille d'un cd */
++gboolean readom_getsize_callback(GIOChannel *Astd, GIOCondition Acond, gpointer Adata)
+ {
+   GIOStatus Lstatus;
+   Tgrave *Lg = (Tgrave *)Adata;
