@@ -12,8 +12,8 @@ License:	GPLv2+
 Group:		Archiving/Cd burning
 BuildRequires:	imagemagick
 BuildRequires:	gtk2-devel libglade2.0-devel libid3tag-devel
-BuildRequires:	libvorbis-devel libmad-devel
-BuildRequires:	libflac-devel
+BuildRequires:	pkgconfig(vorbis) libmad-devel
+BuildRequires:	pkgconfig(flac)
 BuildRequires:	mng-devel
 BuildRequires:	perl-XML-Parser
 BuildRequires: desktop-file-utils
