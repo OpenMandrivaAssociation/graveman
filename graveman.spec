@@ -2,10 +2,10 @@
 
 Name: 	 	graveman
 Summary: 	Simple frontend for CD creation
-Version: 	0.3.12
-Release: 	13
+Version: 	0.3.12.5
+Release: 	1
 
-Source:		http://graveman.tuxfamily.org/sources/%{name}-%{realver}.tar.bz2
+Source:		http://graveman.tuxfamily.org/sources/graveman-0.3.12-5.tar.bz2
 Patch: graveman-0.3.12-5-cdrkit.patch
 URL:		http://graveman.tuxfamily.org/index-e.php
 License:	GPLv2+
@@ -190,4 +190,5 @@ convert -size 16x16 pixmaps/graver.png %{buildroot}/%_miconsdir/%name.png
 
 * Mon Jan 10 2005 Austin Acton <austin@mandrake.org> 0.2.20050110-1mdk
 - initial package
+
 
