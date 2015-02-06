@@ -3,7 +3,7 @@
 Name: 	 	graveman
 Summary: 	Simple frontend for CD creation
 Version: 	0.3.12
-Release: 	13
+Release: 	14
 
 Source:		http://graveman.tuxfamily.org/sources/%{name}-%{realver}.tar.bz2
 Patch: graveman-0.3.12-5-cdrkit.patch
