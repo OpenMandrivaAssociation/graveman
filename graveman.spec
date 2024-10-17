@@ -7,7 +7,7 @@ Release: 	14
 
 Source:		http://graveman.tuxfamily.org/sources/%{name}-%{realver}.tar.bz2
 Patch: graveman-0.3.12-5-cdrkit.patch
-URL:		http://graveman.tuxfamily.org/index-e.php
+URL:		https://graveman.tuxfamily.org/index-e.php
 License:	GPLv2+
 Group:		Archiving/Cd burning
 BuildRequires:	imagemagick
